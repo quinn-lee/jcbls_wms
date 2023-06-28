@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jcbls_app/core/hi_state.dart';
+import 'package:jcbls_app/navigator/hi_navigator.dart';
 import 'package:jcbls_app/widget/home_appbar.dart';
 
 class InventoryPage extends StatefulWidget {
@@ -14,8 +15,18 @@ class _InventoryPageState extends HiState<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar("Inventory"),
-      body: const Center(
-        child: Text('Waiting for development'),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Transfer Unmount"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.transferUnmountScanSpacePage);
+            },
+          ),
+        ],
       ),
     );
   }

@@ -3,10 +3,13 @@ import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_mount_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
+import 'package:jcbls_app/page/inventory_page.dart';
 
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
+import 'package:jcbls_app/page/transfer_unmount_page.dart';
+import 'package:jcbls_app/page/transfer_unmount_scan_space_page.dart';
 
 typedef RouteChangeListener(RouteStatusInfo current, RouteStatusInfo? pre);
 
@@ -33,8 +36,11 @@ enum RouteStatus {
   returnedPage,
   inboundPage,
   outboundPage,
+  inventoryPage,
   inboundMountListPage,
-  inboundMountPage
+  inboundMountPage,
+  transferUnmountScanSpacePage,
+  transferUnmountPage
 }
 
 // 获取page 对应的RouteStatus
@@ -45,6 +51,8 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.home;
   } else if (page.child is ReturnedPage) {
     return RouteStatus.returnedPage;
+  } else if (page.child is InventoryPage) {
+    return RouteStatus.inventoryPage;
   } else if (page.child is InboundPage) {
     return RouteStatus.inboundPage;
   } else if (page.child is OutboundPage) {
@@ -53,6 +61,10 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.inboundMountListPage;
   } else if (page.child is InboundMountPage) {
     return RouteStatus.inboundMountPage;
+  } else if (page.child is TransferUnmountScanSpacePage) {
+    return RouteStatus.transferUnmountScanSpacePage;
+  } else if (page.child is TransferUnmountPage) {
+    return RouteStatus.transferUnmountPage;
   } else {
     return RouteStatus.unknown;
   }

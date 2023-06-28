@@ -11,9 +11,12 @@ import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_mount_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
+import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
+import 'package:jcbls_app/page/transfer_unmount_page.dart';
+import 'package:jcbls_app/page/transfer_unmount_scan_space_page.dart';
 import 'package:jcbls_app/util/authority.dart';
 import 'package:jcbls_app/util/color.dart';
 import 'package:jcbls_app/util/toast.dart';
@@ -103,6 +106,7 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = [];
   InboundBatch? inboundBatch;
+  String? transferSpaceNum;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -112,6 +116,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       _routeStatus = routeStatus;
       if (routeStatus == RouteStatus.inboundMountPage) {
         inboundBatch = args!['batch'];
+      } else if (routeStatus == RouteStatus.transferUnmountPage) {
+        transferSpaceNum = args!['space_num'];
       }
       notifyListeners();
     });
@@ -153,6 +159,12 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const InboundMountListPage());
     } else if (routeStatus == RouteStatus.inboundMountPage) {
       page = pageWrap(InboundMountPage(inboundBatch!));
+    } else if (routeStatus == RouteStatus.transferUnmountPage) {
+      page = pageWrap(TransferUnmountPage(transferSpaceNum!));
+    } else if (routeStatus == RouteStatus.transferUnmountScanSpacePage) {
+      page = pageWrap(const TransferUnmountScanSpacePage());
+    } else if (routeStatus == RouteStatus.inventoryPage) {
+      page = pageWrap(const InventoryPage());
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
