@@ -125,7 +125,10 @@ class _TransferMountPageState extends HiState<TransferMountPage> {
       if (result['code'] == 0) {
         setState(() {
           _isLoading = false;
-          maxQty = result['data'][0]['max_mount_quantity'];
+          maxQty = 0;
+          for (Map ele in result['data']) {
+            maxQty = (maxQty! + ele['max_mount_quantity']) as int?;
+          }
           quantity = maxQty;
           textEditingController2.text = quantity.toString();
         });

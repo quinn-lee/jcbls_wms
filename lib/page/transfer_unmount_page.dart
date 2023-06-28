@@ -125,7 +125,10 @@ class _TransferUnmountPageState extends HiState<TransferUnmountPage> {
       if (result['code'] == 0) {
         setState(() {
           _isLoading = false;
-          maxQty = result['data'][0]['max_unmount_quantity'];
+          maxQty = 0;
+          for (Map ele in result['data']) {
+            maxQty = (maxQty! + ele['max_unmount_quantity']) as int?;
+          }
           quantity = maxQty;
           textEditingController2.text = quantity.toString();
         });
