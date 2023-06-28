@@ -61,7 +61,7 @@ class _InboundMountListPageState extends HiState<InboundMountListPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar("Need To Be Processed Parcels", "", () {}),
+        appBar: appBar("Mount List", "", () {}),
         body: LoadingContainer(
           cover: true,
           isLoading: _isLoading,
@@ -158,7 +158,11 @@ class _InboundMountListPageState extends HiState<InboundMountListPage>
           Container(
               padding: const EdgeInsets.all(12),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  HiNavigator.getInstance().onJumpTo(
+                      RouteStatus.inboundMountPage,
+                      args: {"batch": ele});
+                },
                 child: const Icon(
                   Icons.arrow_forward,
                   color: Colors.blueAccent,
@@ -184,6 +188,11 @@ class _InboundMountListPageState extends HiState<InboundMountListPage>
           for (var item in result['data']['rec_infos']) {
             inboundBatches.add(InboundBatch.fromJson(item));
           }
+          if (inboundBatches.length == 1 && skuCode != "") {
+            HiNavigator.getInstance().onJumpTo(RouteStatus.inboundMountPage,
+                args: {"batch": inboundBatches[0]});
+          }
+          num = "";
           _isLoading = false;
         });
         if (result['data'].length == 0) {
@@ -194,6 +203,7 @@ class _InboundMountListPageState extends HiState<InboundMountListPage>
         showWarnToast(result['reason'].join(","));
         setState(() {
           _isLoading = false;
+          num = "";
           inboundBatches.clear();
         });
       }
@@ -202,6 +212,7 @@ class _InboundMountListPageState extends HiState<InboundMountListPage>
       showWarnToast(e.toString());
       setState(() {
         _isLoading = false;
+        num = "";
         inboundBatches.clear();
       });
     }

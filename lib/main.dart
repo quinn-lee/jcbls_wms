@@ -5,9 +5,11 @@ import 'package:jcbls_app/db/hi_cache.dart';
 import 'package:jcbls_app/http/core/hi_error.dart';
 import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/dao/login_dao.dart';
+import 'package:jcbls_app/model/inbound_batch.dart';
 import 'package:jcbls_app/navigator/hi_navigator.dart';
 import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
+import 'package:jcbls_app/page/inbound_mount_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
@@ -100,6 +102,7 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
 
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = [];
+  InboundBatch? inboundBatch;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -107,7 +110,9 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
     RouteJumpListener rjl =
         RouteJumpListener(onJumpTo: (RouteStatus routeStatus, {Map? args}) {
       _routeStatus = routeStatus;
-
+      if (routeStatus == RouteStatus.inboundMountPage) {
+        inboundBatch = args!['batch'];
+      }
       notifyListeners();
     });
     HiNavigator.getInstance().registerRouteJump(rjl);
@@ -146,6 +151,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const OutboundPage());
     } else if (routeStatus == RouteStatus.inboundMountListPage) {
       page = pageWrap(const InboundMountListPage());
+    } else if (routeStatus == RouteStatus.inboundMountPage) {
+      page = pageWrap(InboundMountPage(inboundBatch!));
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
