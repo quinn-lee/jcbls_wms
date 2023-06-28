@@ -42,7 +42,7 @@ class TransferDao {
     BaseRequest request = TransferMountRequest();
     request.add("sku_code", skuCode);
     request.add("space_num", spaceNum);
-    request.add("unmount_quantity", unmountQty);
+    request.add("mount_quantity", unmountQty);
     var result = await HiNet.getInstance().fire(request);
     print(result);
     return result;

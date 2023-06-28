@@ -26,6 +26,15 @@ class _InventoryPageState extends HiState<InventoryPage> {
                   .onJumpTo(RouteStatus.transferUnmountScanSpacePage);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Transfer Mount"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.transferMountScanSpacePage);
+            },
+          ),
         ],
       ),
     );

@@ -15,6 +15,8 @@ import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
+import 'package:jcbls_app/page/transfer_mount_page.dart';
+import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
 import 'package:jcbls_app/page/transfer_unmount_page.dart';
 import 'package:jcbls_app/page/transfer_unmount_scan_space_page.dart';
 import 'package:jcbls_app/util/authority.dart';
@@ -106,7 +108,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = [];
   InboundBatch? inboundBatch;
-  String? transferSpaceNum;
+  String? transferUnmountSpaceNum;
+  String? transferMountSpaceNum;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -117,7 +120,9 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       if (routeStatus == RouteStatus.inboundMountPage) {
         inboundBatch = args!['batch'];
       } else if (routeStatus == RouteStatus.transferUnmountPage) {
-        transferSpaceNum = args!['space_num'];
+        transferUnmountSpaceNum = args!['space_num'];
+      } else if (routeStatus == RouteStatus.transferMountPage) {
+        transferMountSpaceNum = args!['space_num'];
       }
       notifyListeners();
     });
@@ -160,9 +165,13 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
     } else if (routeStatus == RouteStatus.inboundMountPage) {
       page = pageWrap(InboundMountPage(inboundBatch!));
     } else if (routeStatus == RouteStatus.transferUnmountPage) {
-      page = pageWrap(TransferUnmountPage(transferSpaceNum!));
+      page = pageWrap(TransferUnmountPage(transferUnmountSpaceNum!));
     } else if (routeStatus == RouteStatus.transferUnmountScanSpacePage) {
       page = pageWrap(const TransferUnmountScanSpacePage());
+    } else if (routeStatus == RouteStatus.transferMountPage) {
+      page = pageWrap(TransferMountPage(transferMountSpaceNum!));
+    } else if (routeStatus == RouteStatus.transferMountScanSpacePage) {
+      page = pageWrap(const TransferMountScanSpacePage());
     } else if (routeStatus == RouteStatus.inventoryPage) {
       page = pageWrap(const InventoryPage());
     }

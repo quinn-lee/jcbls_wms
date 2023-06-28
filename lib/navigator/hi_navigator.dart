@@ -8,6 +8,8 @@ import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
+import 'package:jcbls_app/page/transfer_mount_page.dart';
+import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
 import 'package:jcbls_app/page/transfer_unmount_page.dart';
 import 'package:jcbls_app/page/transfer_unmount_scan_space_page.dart';
 
@@ -40,7 +42,9 @@ enum RouteStatus {
   inboundMountListPage,
   inboundMountPage,
   transferUnmountScanSpacePage,
-  transferUnmountPage
+  transferUnmountPage,
+  transferMountScanSpacePage,
+  transferMountPage
 }
 
 // 获取page 对应的RouteStatus
@@ -65,6 +69,10 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.transferUnmountScanSpacePage;
   } else if (page.child is TransferUnmountPage) {
     return RouteStatus.transferUnmountPage;
+  } else if (page.child is TransferMountScanSpacePage) {
+    return RouteStatus.transferMountScanSpacePage;
+  } else if (page.child is TransferMountPage) {
+    return RouteStatus.transferMountPage;
   } else {
     return RouteStatus.unknown;
   }
