@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jcbls_app/page/home_page.dart';
+import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
 
 import 'package:jcbls_app/page/login_page.dart';
@@ -31,6 +32,7 @@ enum RouteStatus {
   returnedPage,
   inboundPage,
   outboundPage,
+  inboundMountListPage
 }
 
 // 获取page 对应的RouteStatus
@@ -45,6 +47,8 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.inboundPage;
   } else if (page.child is OutboundPage) {
     return RouteStatus.outboundPage;
+  } else if (page.child is InboundMountListPage) {
+    return RouteStatus.inboundMountListPage;
   } else {
     return RouteStatus.unknown;
   }

@@ -38,7 +38,8 @@ class _InboundPageState extends HiState<InboundPage> {
             title: const Text("Inbound Mount"),
             trailing: const Icon(Icons.keyboard_arrow_right),
             onTap: () {
-              // HiNavigator.getInstance().onJumpTo(RouteStatus.inboundReceive);
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.inboundMountListPage);
             },
           ),
         ],

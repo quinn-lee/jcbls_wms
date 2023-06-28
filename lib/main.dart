@@ -7,6 +7,7 @@ import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/dao/login_dao.dart';
 import 'package:jcbls_app/navigator/hi_navigator.dart';
 import 'package:jcbls_app/page/home_page.dart';
+import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
@@ -143,6 +144,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const InboundPage());
     } else if (routeStatus == RouteStatus.outboundPage) {
       page = pageWrap(const OutboundPage());
+    } else if (routeStatus == RouteStatus.inboundMountListPage) {
+      page = pageWrap(const InboundMountListPage());
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
