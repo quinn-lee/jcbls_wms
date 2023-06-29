@@ -3,9 +3,19 @@ import 'dart:convert';
 import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/request/base_request.dart';
 import 'package:jcbls_app/http/request/inbound_mount_request.dart';
+import 'package:jcbls_app/http/request/inbound_scanning_request.dart';
 import 'package:jcbls_app/http/request/wait_to_mount_request.dart';
 
 class InboundDao {
+  // 入库扫描，记录UIN/运单号
+  static scanning(String num) async {
+    BaseRequest request = InboundScanningRequest();
+    request.add("num", num);
+    var result = await HiNet.getInstance().fire(request);
+    print(result);
+    return result;
+  }
+
   // 入库-待安放收货信息列表
   static waitToMount({String? skuCode}) async {
     BaseRequest request = WaitToMountRequest();

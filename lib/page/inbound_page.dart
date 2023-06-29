@@ -42,6 +42,15 @@ class _InboundPageState extends HiState<InboundPage> {
                   .onJumpTo(RouteStatus.inboundMountListPage);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Inbound Scanning"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.inboundScanningPage);
+            },
+          ),
         ],
       ),
     );

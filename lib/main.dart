@@ -11,6 +11,7 @@ import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_mount_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
+import 'package:jcbls_app/page/inbound_scanning_page.dart';
 import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
@@ -162,6 +163,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const OutboundPage());
     } else if (routeStatus == RouteStatus.inboundMountListPage) {
       page = pageWrap(const InboundMountListPage());
+    } else if (routeStatus == RouteStatus.inboundScanningPage) {
+      page = pageWrap(const InboundScanningPage());
     } else if (routeStatus == RouteStatus.inboundMountPage) {
       page = pageWrap(InboundMountPage(inboundBatch!));
     } else if (routeStatus == RouteStatus.transferUnmountPage) {
