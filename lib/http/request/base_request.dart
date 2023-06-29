@@ -1,12 +1,12 @@
 import 'package:jcbls_app/http/dao/login_dao.dart';
 import 'package:jcbls_app/util/authority.dart';
 
-enum HttpMethod { POST, DELETE } // 框架原因，不支持get方法
+enum HttpMethod { POST, DELETE, GET }
 
 // 基础请求
 abstract class BaseRequest {
   var pathParams; // path参数
-  var formData; // json参数，该参数有值时，以该参数为准，params参数失效。设置时需要对使用json.encode进行编码
+  var formData; // json参数，该参数有值时，以该参数为准，params参数失效。POST、DELETE时需要对该值使用json.encode进行编码，类型为String，GET时，该值定义为Map<String, dynamic>类型
   var useHttps = false; // 默认不使用https
   var isLoginApi = false; // 登录获取token接口特殊处理，需要把参数放到url后
   Map<String, dynamic> params = {}; // 查询参数

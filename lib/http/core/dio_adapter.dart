@@ -30,6 +30,14 @@ class DioAdapter extends HiNetAdapter {
           response = await Dio()
               .delete(request.url(), data: request.params, options: options);
         }
+      } else if (request.httpMethod() == HttpMethod.GET) {
+        if (request.formData != null) {
+          response = await Dio().get(request.url(),
+              queryParameters: request.formData, options: options);
+        } else {
+          response = await Dio().get(request.url(),
+              queryParameters: request.params, options: options);
+        }
       }
     } on DioError catch (e) {
       if (e.response != null) {
