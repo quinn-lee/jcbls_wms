@@ -6,12 +6,15 @@ import 'package:jcbls_app/http/core/hi_error.dart';
 import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/dao/login_dao.dart';
 import 'package:jcbls_app/model/inbound_batch.dart';
+import 'package:jcbls_app/model/inbound_task.dart';
 import 'package:jcbls_app/navigator/hi_navigator.dart';
 import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_mount_page.dart';
 import 'package:jcbls_app/page/inbound_page.dart';
 import 'package:jcbls_app/page/inbound_scanning_page.dart';
+import 'package:jcbls_app/page/inbound_tasks_page.dart';
+import 'package:jcbls_app/page/inbound_upload_photos_page.dart';
 import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
@@ -111,6 +114,7 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
   InboundBatch? inboundBatch;
   String? transferUnmountSpaceNum;
   String? transferMountSpaceNum;
+  InboundTask? inboundTask;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -124,6 +128,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
         transferUnmountSpaceNum = args!['space_num'];
       } else if (routeStatus == RouteStatus.transferMountPage) {
         transferMountSpaceNum = args!['space_num'];
+      } else if (routeStatus == RouteStatus.inboundUploadPhotosPage) {
+        inboundTask = args!['task'];
       }
       notifyListeners();
     });
@@ -165,6 +171,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const InboundMountListPage());
     } else if (routeStatus == RouteStatus.inboundScanningPage) {
       page = pageWrap(const InboundScanningPage());
+    } else if (routeStatus == RouteStatus.inboundTasksPage) {
+      page = pageWrap(const InboundTasksPage());
     } else if (routeStatus == RouteStatus.inboundMountPage) {
       page = pageWrap(InboundMountPage(inboundBatch!));
     } else if (routeStatus == RouteStatus.transferUnmountPage) {
@@ -177,6 +185,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const TransferMountScanSpacePage());
     } else if (routeStatus == RouteStatus.inventoryPage) {
       page = pageWrap(const InventoryPage());
+    } else if (routeStatus == RouteStatus.inboundUploadPhotosPage) {
+      page = pageWrap(InboundUploadPhotosPage(inboundTask!));
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/request/base_request.dart';
+import 'package:jcbls_app/http/request/inbound_file_request.dart';
 import 'package:jcbls_app/http/request/inbound_mount_request.dart';
 import 'package:jcbls_app/http/request/inbound_scanning_request.dart';
 import 'package:jcbls_app/http/request/inbound_tasks_request.dart';
@@ -9,14 +10,29 @@ import 'package:jcbls_app/http/request/wait_to_mount_request.dart';
 
 class InboundDao {
   // 入库任务列表
-  static tasks(String taskNum) async {
+  static tasks({String? taskNum}) async {
     BaseRequest request = InboundTasksRequest();
     Map<String, dynamic> bodyJson;
-    bodyJson = {'page': 1, 'per_page': 10, "q\[task_num_cont\]": taskNum};
+    if (taskNum != null) {
+      bodyJson = {'page': 1, 'per_page': 10, "q\[task_num_cont\]": taskNum};
+    } else {
+      bodyJson = {'page': 1, 'per_page': 30};
+    }
 
     request.formData = bodyJson;
     // 如下方式也有效
     // request.add("q\[task_num_cont\]", "IN230410000007A");
+    var result = await HiNet.getInstance().fire(request);
+    print(result);
+    return result;
+  }
+
+  // 入库上传图片
+  static uploadPhotos(int id, List files, String category) async {
+    BaseRequest request = InboundFileRequest();
+    request.pathParams = "$id/app_upload_file";
+    request.add("files", files);
+    request.add("category", category);
     var result = await HiNet.getInstance().fire(request);
     print(result);
     return result;
