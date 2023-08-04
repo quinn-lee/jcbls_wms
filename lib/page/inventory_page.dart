@@ -35,6 +35,15 @@ class _InventoryPageState extends HiState<InventoryPage> {
                   .onJumpTo(RouteStatus.transferMountScanSpacePage);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Blue Thermal Print TEST"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.blueThermalPrintPage);
+            },
+          ),
         ],
       ),
     );

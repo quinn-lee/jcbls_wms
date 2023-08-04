@@ -43,6 +43,7 @@ dependencies:
   flutter_xupdate: ^2.0.2
   image_gallery_saver: ^1.7.1
   uri_to_file: ^0.2.0
+  blue_thermal_printer: ^1.2.3
 
 dev_dependencies:
   flutter_test:

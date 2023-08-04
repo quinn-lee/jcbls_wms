@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jcbls_app/page/blue_thermal_print_page.dart';
 import 'package:jcbls_app/page/home_page.dart';
 import 'package:jcbls_app/page/inbound_mount_list_page.dart';
 import 'package:jcbls_app/page/inbound_mount_page.dart';
@@ -50,7 +51,8 @@ enum RouteStatus {
   transferUnmountScanSpacePage,
   transferUnmountPage,
   transferMountScanSpacePage,
-  transferMountPage
+  transferMountPage,
+  blueThermalPrintPage
 }
 
 // 获取page 对应的RouteStatus
@@ -85,6 +87,8 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.transferMountScanSpacePage;
   } else if (page.child is TransferMountPage) {
     return RouteStatus.transferMountPage;
+  } else if (page.child is BlueThermalPrintPage) {
+    return RouteStatus.blueThermalPrintPage;
   } else {
     return RouteStatus.unknown;
   }
