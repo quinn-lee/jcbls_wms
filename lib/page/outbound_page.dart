@@ -15,8 +15,18 @@ class _OutboundPageState extends HiState<OutboundPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar("Outbound"),
-      body: const Center(
-        child: Text('Waiting for development'),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Outbound Review"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.outboundReviewPage);
+            },
+          ),
+        ],
       ),
     );
   }

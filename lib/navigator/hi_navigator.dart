@@ -11,6 +11,7 @@ import 'package:jcbls_app/page/inventory_page.dart';
 
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
+import 'package:jcbls_app/page/outbound_review_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
 import 'package:jcbls_app/page/transfer_mount_page.dart';
 import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
@@ -52,7 +53,8 @@ enum RouteStatus {
   transferUnmountPage,
   transferMountScanSpacePage,
   transferMountPage,
-  blueThermalPrintPage
+  blueThermalPrintPage,
+  outboundReviewPage
 }
 
 // 获取page 对应的RouteStatus
@@ -89,6 +91,8 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.transferMountPage;
   } else if (page.child is BlueThermalPrintPage) {
     return RouteStatus.blueThermalPrintPage;
+  } else if (page.child is OutBoundReviewPage) {
+    return RouteStatus.outboundReviewPage;
   } else {
     return RouteStatus.unknown;
   }

@@ -19,6 +19,7 @@ import 'package:jcbls_app/page/inbound_upload_photos_page.dart';
 import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
+import 'package:jcbls_app/page/outbound_review_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
 import 'package:jcbls_app/page/transfer_mount_page.dart';
 import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
@@ -190,6 +191,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(InboundUploadPhotosPage(inboundTask!));
     } else if (routeStatus == RouteStatus.blueThermalPrintPage) {
       page = pageWrap(const BlueThermalPrintPage());
+    } else if (routeStatus == RouteStatus.outboundReviewPage) {
+      page = pageWrap(const OutBoundReviewPage());
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
