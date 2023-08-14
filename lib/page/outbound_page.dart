@@ -26,6 +26,15 @@ class _OutboundPageState extends HiState<OutboundPage> {
                   .onJumpTo(RouteStatus.outboundReviewPage);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Outbound Scanning"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.outboundScanningPage);
+            },
+          ),
         ],
       ),
     );

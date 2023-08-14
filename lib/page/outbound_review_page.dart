@@ -8,14 +8,14 @@ import 'package:jcbls_app/widget/cancel_button.dart';
 import 'package:jcbls_app/widget/loading_container.dart';
 import 'package:jcbls_app/widget/scan_input.dart';
 
-class OutBoundReviewPage extends StatefulWidget {
-  const OutBoundReviewPage({Key? key}) : super(key: key);
+class OutboundReviewPage extends StatefulWidget {
+  const OutboundReviewPage({Key? key}) : super(key: key);
 
   @override
-  State<OutBoundReviewPage> createState() => _OutBoundReviewPageState();
+  State<OutboundReviewPage> createState() => _OutboundReviewPageState();
 }
 
-class _OutBoundReviewPageState extends HiState<OutBoundReviewPage> {
+class _OutboundReviewPageState extends HiState<OutboundReviewPage> {
   String? num;
   String? shipmentNum;
   String? barcode;
@@ -132,6 +132,7 @@ class _OutBoundReviewPageState extends HiState<OutBoundReviewPage> {
     setState(() {
       shipmentNum = null;
       barcode = null;
+      num = null;
     });
     if (mounted) {
       textEditingController.clear();
@@ -187,7 +188,7 @@ class _OutBoundReviewPageState extends HiState<OutBoundReviewPage> {
             resultShow.add({
               "status": true,
               "show":
-                  "${now.hour}:${now.minute}:${now.second} - Succeeded! $shipmentNum,${result['data']['scan_log']['remark']}"
+                  "${now.hour}:${now.minute}:${now.second} - $shipmentNum,${result['data']['scan_log']['remark']}"
             });
           });
           player.play('sounds/success01.mp3');
@@ -223,6 +224,7 @@ class _OutBoundReviewPageState extends HiState<OutBoundReviewPage> {
       _isLoading = false;
       shipmentNum = null;
       barcode = null;
+      num = null;
       textEditingController.clear();
       textEditingController1.clear();
       textEditingController2.clear();
