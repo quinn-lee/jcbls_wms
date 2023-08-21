@@ -13,6 +13,8 @@ import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/outbound_review_page.dart';
 import 'package:jcbls_app/page/outbound_scanning_page.dart';
+import 'package:jcbls_app/page/outbound_wave_detail_page.dart';
+import 'package:jcbls_app/page/outbound_wave_single_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
 import 'package:jcbls_app/page/transfer_mount_page.dart';
 import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
@@ -56,7 +58,9 @@ enum RouteStatus {
   transferMountPage,
   blueThermalPrintPage,
   outboundReviewPage,
-  outboundScanningPage
+  outboundScanningPage,
+  outboundWaveSinglePage,
+  outboundWaveDetailPage
 }
 
 // 获取page 对应的RouteStatus
@@ -97,6 +101,10 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.outboundReviewPage;
   } else if (page.child is OutboundScanningPage) {
     return RouteStatus.outboundScanningPage;
+  } else if (page.child is OutboundWaveSinglePage) {
+    return RouteStatus.outboundWaveSinglePage;
+  } else if (page.child is OutboundWaveDetailPage) {
+    return RouteStatus.outboundWaveDetailPage;
   } else {
     return RouteStatus.unknown;
   }

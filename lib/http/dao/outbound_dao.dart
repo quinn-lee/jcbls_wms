@@ -2,6 +2,7 @@ import 'package:jcbls_app/http/core/hi_net.dart';
 import 'package:jcbls_app/http/request/base_request.dart';
 import 'package:jcbls_app/http/request/outbound_scanning_request.dart';
 import 'package:jcbls_app/http/request/outbound_review_request.dart';
+import 'package:jcbls_app/http/request/outbound_wave_request.dart';
 
 class OutboundDao {
   // 出库 - 复核扫描
@@ -18,6 +19,14 @@ class OutboundDao {
   static scanning(String num) async {
     BaseRequest request = OutboundScanningRequest();
     request.add("num", num);
+    var result = await HiNet.getInstance().fire(request);
+    print(result);
+    return result;
+  }
+
+  // 出库-波次列表（待取件,一票一件）
+  static waitToPick() async {
+    BaseRequest request = OutboundWaveRequest();
     var result = await HiNet.getInstance().fire(request);
     print(result);
     return result;

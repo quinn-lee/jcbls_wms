@@ -35,6 +35,15 @@ class _OutboundPageState extends HiState<OutboundPage> {
                   .onJumpTo(RouteStatus.outboundScanningPage);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
+            title: const Text("Outbound Wave List"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.outboundWaveSinglePage);
+            },
+          ),
         ],
       ),
     );

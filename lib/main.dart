@@ -21,6 +21,8 @@ import 'package:jcbls_app/page/login_page.dart';
 import 'package:jcbls_app/page/outbound_page.dart';
 import 'package:jcbls_app/page/outbound_review_page.dart';
 import 'package:jcbls_app/page/outbound_scanning_page.dart';
+import 'package:jcbls_app/page/outbound_wave_detail_page.dart';
+import 'package:jcbls_app/page/outbound_wave_single_page.dart';
 import 'package:jcbls_app/page/returned_page.dart';
 import 'package:jcbls_app/page/transfer_mount_page.dart';
 import 'package:jcbls_app/page/transfer_mount_scan_space_page.dart';
@@ -118,6 +120,7 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
   String? transferUnmountSpaceNum;
   String? transferMountSpaceNum;
   InboundTask? inboundTask;
+  Map? wave;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -133,6 +136,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
         transferMountSpaceNum = args!['space_num'];
       } else if (routeStatus == RouteStatus.inboundUploadPhotosPage) {
         inboundTask = args!['task'];
+      } else if (routeStatus == RouteStatus.outboundWaveDetailPage) {
+        wave = args!['wave'];
       }
       notifyListeners();
     });
@@ -196,6 +201,10 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const OutboundReviewPage());
     } else if (routeStatus == RouteStatus.outboundScanningPage) {
       page = pageWrap(const OutboundScanningPage());
+    } else if (routeStatus == RouteStatus.outboundWaveSinglePage) {
+      page = pageWrap(const OutboundWaveSinglePage());
+    } else if (routeStatus == RouteStatus.outboundWaveDetailPage) {
+      page = pageWrap(OutboundWaveDetailPage(wave!));
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
