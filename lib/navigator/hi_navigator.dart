@@ -7,6 +7,7 @@ import 'package:jcbls_app/page/inbound_page.dart';
 import 'package:jcbls_app/page/inbound_scanning_page.dart';
 import 'package:jcbls_app/page/inbound_tasks_page.dart';
 import 'package:jcbls_app/page/inbound_upload_photos_page.dart';
+import 'package:jcbls_app/page/inventory_check_operate_page.dart';
 import 'package:jcbls_app/page/inventory_check_tasks_page.dart';
 import 'package:jcbls_app/page/inventory_page.dart';
 
@@ -62,7 +63,8 @@ enum RouteStatus {
   outboundScanningPage,
   outboundWaveSinglePage,
   outboundWaveDetailPage,
-  inventoryCheckoutTasksPage
+  inventoryCheckTasksPage,
+  inventoryCheckOperatePage
 }
 
 // 获取page 对应的RouteStatus
@@ -108,7 +110,9 @@ RouteStatus getStatus(MaterialPage page) {
   } else if (page.child is OutboundWaveDetailPage) {
     return RouteStatus.outboundWaveDetailPage;
   } else if (page.child is InventoryCheckTasksPage) {
-    return RouteStatus.inventoryCheckoutTasksPage;
+    return RouteStatus.inventoryCheckTasksPage;
+  } else if (page.child is InventoryCheckOperatePage) {
+    return RouteStatus.inventoryCheckOperatePage;
   } else {
     return RouteStatus.unknown;
   }

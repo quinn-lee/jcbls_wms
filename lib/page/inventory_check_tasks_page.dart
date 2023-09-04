@@ -24,6 +24,7 @@ class _InventoryCheckTasksPageState extends HiState<InventoryCheckTasksPage>
 
   @override
   void initState() {
+    checkTasks.clear();
     loadData();
     super.initState();
   }
@@ -98,7 +99,7 @@ class _InventoryCheckTasksPageState extends HiState<InventoryCheckTasksPage>
               child: InkWell(
                 onTap: () {
                   HiNavigator.getInstance().onJumpTo(
-                      RouteStatus.inboundUploadPhotosPage,
+                      RouteStatus.inventoryCheckOperatePage,
                       args: {"check_task": ele});
                 },
                 child: const Icon(

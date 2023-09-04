@@ -16,6 +16,7 @@ import 'package:jcbls_app/page/inbound_page.dart';
 import 'package:jcbls_app/page/inbound_scanning_page.dart';
 import 'package:jcbls_app/page/inbound_tasks_page.dart';
 import 'package:jcbls_app/page/inbound_upload_photos_page.dart';
+import 'package:jcbls_app/page/inventory_check_operate_page.dart';
 import 'package:jcbls_app/page/inventory_check_tasks_page.dart';
 import 'package:jcbls_app/page/inventory_page.dart';
 import 'package:jcbls_app/page/login_page.dart';
@@ -122,6 +123,7 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
   String? transferMountSpaceNum;
   InboundTask? inboundTask;
   Map? wave;
+  Map? checkTask;
 
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
   EtRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
@@ -139,6 +141,8 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
         inboundTask = args!['task'];
       } else if (routeStatus == RouteStatus.outboundWaveDetailPage) {
         wave = args!['wave'];
+      } else if (routeStatus == RouteStatus.inventoryCheckOperatePage) {
+        checkTask = args!['check_task'];
       }
       notifyListeners();
     });
@@ -206,8 +210,10 @@ class EtRouteDelegate extends RouterDelegate<EtRoutePath>
       page = pageWrap(const OutboundWaveSinglePage());
     } else if (routeStatus == RouteStatus.outboundWaveDetailPage) {
       page = pageWrap(OutboundWaveDetailPage(wave!));
-    } else if (routeStatus == RouteStatus.inventoryCheckoutTasksPage) {
+    } else if (routeStatus == RouteStatus.inventoryCheckTasksPage) {
       page = pageWrap(const InventoryCheckTasksPage());
+    } else if (routeStatus == RouteStatus.inventoryCheckOperatePage) {
+      page = pageWrap(InventoryCheckOperatePage(checkTask!));
     }
     //重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];

@@ -23,7 +23,7 @@ class InventoryDao {
   }
 
   // 盘点任务-添加盘点信息
-  static mountOperate(int id, String skuCode, int quantity) async {
+  static checkOperate(int id, String skuCode, int quantity) async {
     BaseRequest request = InventoryCheckOperateRequest();
     request.pathParams = "$id/operate";
     request.add("sku_code", skuCode);

@@ -41,7 +41,7 @@ class _InventoryPageState extends HiState<InventoryPage> {
             trailing: const Icon(Icons.keyboard_arrow_right),
             onTap: () {
               HiNavigator.getInstance()
-                  .onJumpTo(RouteStatus.inventoryCheckoutTasksPage);
+                  .onJumpTo(RouteStatus.inventoryCheckTasksPage);
             },
           ),
           ListTile(
