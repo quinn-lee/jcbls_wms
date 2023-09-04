@@ -37,6 +37,15 @@ class _InventoryPageState extends HiState<InventoryPage> {
           ),
           ListTile(
             leading: const Icon(Icons.scanner),
+            title: const Text("Check"),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              HiNavigator.getInstance()
+                  .onJumpTo(RouteStatus.inventoryCheckoutTasksPage);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.scanner),
             title: const Text("Blue Thermal Print TEST"),
             trailing: const Icon(Icons.keyboard_arrow_right),
             onTap: () {
